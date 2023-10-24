@@ -13,20 +13,20 @@ int main()
             break;
 
         else if(n <= m){
-            if(m % n == 0){
+            if(m % n == 0)
                 printf("factor\n");
-            }
-            else{
+            
+            else
                 printf("neither\n");
-            }
+            
         }
         else{
-            if(n % m == 0){
+            if(n % m == 0)
                 printf("multiple\n");
-            }
-            else{
+            
+            else
                 printf("neither\n");
-            }
+            
         }
     }while(n != 0 || m != 0);
     
