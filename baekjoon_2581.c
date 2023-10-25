@@ -18,7 +18,7 @@ int main(void) {
 				count += 1;
 
 			if (j == i) {
-				if (count == 2) { // i°¡ ¼Ò¼öÀÎ °æ¿ì
+				if (count == 2) { // iê°€ ì†Œìˆ˜ì¸ ê²½ìš°
 					sum += i;
 					if (sum == i) 
 						min = i;
