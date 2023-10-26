@@ -15,57 +15,40 @@ int main(void) {
 		return 0;
 	}
 
-	while (x > 1) {
-		if (i % 2 == 0) { // ������ �̵�
+	while (count < x) {
+
+		if ((i % 2 == 0) && (n == 0)) { // 오른쪽으로 한칸 이동
 			m++;
 			count++;
-			if (count == x) {
-				printf("%d", n+1);
-				printf("/");
-				printf("%d\n", m+1);
-				break;
-			}
-			if (n == 0) {
-				i++;
-				for (int j = 0; j < i; j++) {
-					n++;
-					m--;
-					count++;
-					if (count == x) {
-						printf("%d", n+1);
-						printf("/");
-						printf("%d\n", m+1);
-						break;
-					}
-				}
-			}
+			i++;
 		}
-		else { // �Ʒ��� �̵�
+
+		else if ((i % 2 != 0) && (m == 0)) { //아래로 한칸 이동
 			n++;
 			count++;
-			if (count == x) {
-				printf("%d", n+1);
-				printf("/");
-				printf("%d\n", m+1);
-				break;
-			}
-			if (m == 0) {
-				i++;
-				for (int j = 0; j < i; j++) {
-					m++;
-					n--;
-					count++;
-					if (count == x) {
-						printf("%d", n+1);
-						printf("/");
-						printf("%d\n", m+1);
-						break;
-					}
-				}
-				
-			}
+			i++;
 		}
+
+		else if (i % 2 != 0) { //아래로 한칸, 왼쪽으로 한칸 이동
+			n++;
+			m--;
+			count++;
+		}
+
+		else if (i % 2 == 0) { //오른쪽으로 한칸, 위쪽으로 한칸 이동
+			m++;
+			n--;
+			count++;
+		}
+			
+		
 	}
+
+
+	printf("%d", n + 1);
+	printf("/");
+	printf("%d\n", m + 1);
+	
 
 	return 0;
 }
