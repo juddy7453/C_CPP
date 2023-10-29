@@ -3,19 +3,9 @@
 # include <math.h>
 
 int f(int m, int l) {
-	int k = 0;
-	int result = m;
+	int q = m / (int)pow(10, l - 1);
 
-	while (l >= 1) {
-		l--;
-		k = m % ((int)pow(10, l));
-		m /= pow(10, l);
-		result += m;
-
-		m = k;
-	}
-
-	return result;
+	return q;
 }
 
 int main(void) {
@@ -23,24 +13,24 @@ int main(void) {
 
 	scanf("%d", &n);
 
-	if (n == 1) {
-		printf("1\n");
-		return 0;
-	}
-	
-	int half = n / 2;
-	int m = half;
+	int m = 1;
 	int mm = m;
 
 	char str[8];
 
-	sprintf(str, "%d", half);
-	// itoa(half, str, 10);
-
-	int l = strlen(str);
-	int result = f(m, l);
-
 	while (m < n) {
+		sprintf(str, "%d", m);
+		// itoa(half, str, 10);
+
+		int l = strlen(str);
+		int result = m;
+
+		while (l > 0) {
+			result += f(m, l);
+			m %= (int)pow(10, l - 1);
+			l--;
+		}
+
 		if (result == n) {
 			printf("%d\n", mm);
 			return 0;
@@ -49,11 +39,12 @@ int main(void) {
 		else {
 			mm++;
 			m = mm;
-			result = f(m, l);
 		}
+		
 	}
 
 	if (m == n)
 		printf("0\n");
+
 	return 0;
 }
