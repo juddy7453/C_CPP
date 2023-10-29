@@ -23,6 +23,11 @@ int main(void) {
 
 	scanf("%d", &n);
 
+	if (n == 1) {
+		printf("1\n");
+		return 0;
+	}
+	
 	int half = n / 2;
 	int m = half;
 	int mm = m;
