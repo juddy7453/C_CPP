@@ -75,10 +75,16 @@ int main(void) {
 	while (count < n) {
 		while (1) {
 			if ((*heap_ptr)->ce1 == NULL) {
-				printf("%d\n", (*heap_ptr)->element);
-				(*heap_ptr)->check = 1;
-				count++;
-				break;
+				if ((*heap_ptr)->check == 1) {
+					heap_ptr = &((*heap_ptr)->pe);
+					(*heap_ptr)->ce1 = NULL;
+				}
+				else {
+					printf("%d\n", (*heap_ptr)->element);
+					(*heap_ptr)->check = 1;
+					count++;
+					break;
+				}
 			}
 			else {
 				if ((*heap_ptr)->ce1->check == 1) {
