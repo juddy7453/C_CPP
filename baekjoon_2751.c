@@ -65,10 +65,15 @@ int main(void) {
 	f(heap_ptr, arr, 1, n);
 
 
-	//printf("##########\n");
-	//printf("%d\n", (*heap_ptr)->element);
-	//printf("%d\n", (*heap_ptr)->ce1->element);
-	//printf("%d\n", (*heap_ptr)->ce1->ce2->element);
+	printf("##########\n");
+	printf("%d\n", (*heap_ptr)->element); // 84
+	printf("%d\n", (*heap_ptr)->ce1->element); // 9
+	printf("%d\n", (*heap_ptr)->ce1->ce1->element); // -4
+	printf("%d\n", (*heap_ptr)->ce1->ce1->ce1->element); // -90
+	printf("%d\n", (*heap_ptr)->ce1->ce1->ce1->ce2->element);
+	printf("%d\n", (*heap_ptr)->ce1->ce1->ce2->element); // 2
+	printf("%d\n", (*heap_ptr)->ce1->ce1->ce2->ce2->element); // 44
+	printf("%d\n", (*heap_ptr)->ce1->ce1->ce2->ce2->ce1->element); // 3
 
 
 	int count = 0;
@@ -96,7 +101,13 @@ int main(void) {
 			}
 		}
 		if ((*heap_ptr)->ce2 != NULL) {
-			heap_ptr = &((*heap_ptr)->ce2);
+			if((*heap_ptr)->check == 1)
+				heap_ptr = &((*heap_ptr)->ce2);
+			else {
+				printf("%d\n", (*heap_ptr)->element);
+				(*heap_ptr)->check = 1;
+				count++;
+			}
 			continue;
 		}
 		else {
