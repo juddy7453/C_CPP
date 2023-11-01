@@ -19,14 +19,17 @@ void f(Node** heap_ptr, int* arr, int index, int size) {
 			(*heap_ptr)->ce2->check = 0;
 			(*heap_ptr)->ce2->ce1 = NULL;
 			(*heap_ptr)->ce2->ce2 = NULL;
-			f(&((*heap_ptr)->pe), arr, index, size);
+			while ((*heap_ptr)->element != arr[0]) {
+				heap_ptr = &((*heap_ptr)->pe);
+//				printf("heap_ptr = %d\n", (*heap_ptr)->element);
+			}
+			f(heap_ptr, arr, index, size);
 		}
 		else {
 			f(&((*heap_ptr)->ce2), arr, index, size);
 		}
 	}
 	else {
-		//		printf("caseB\n");
 		if ((*heap_ptr)->ce1 == NULL) {
 			(*heap_ptr)->ce1 = (Node*)malloc(sizeof(Node));
 			(*heap_ptr)->ce1->pe = (*heap_ptr);
@@ -34,7 +37,11 @@ void f(Node** heap_ptr, int* arr, int index, int size) {
 			(*heap_ptr)->ce1->check = 0;
 			(*heap_ptr)->ce1->ce1 = NULL;
 			(*heap_ptr)->ce1->ce2 = NULL;
-			f(&((*heap_ptr)->pe), arr, index, size);
+			while ((*heap_ptr)->element != arr[0]) {
+				heap_ptr = &((*heap_ptr)->pe);
+//				printf("heap_ptr = %d\n", (*heap_ptr)->element);
+			}
+			f(heap_ptr, arr, index, size);
 		}
 		else {
 			f(&((*heap_ptr)->ce1), arr, index, size);
@@ -65,15 +72,16 @@ int main(void) {
 	f(heap_ptr, arr, 1, n);
 
 
-	printf("##########\n");
-	printf("%d\n", (*heap_ptr)->element); // 84
-	printf("%d\n", (*heap_ptr)->ce1->element); // 9
-	printf("%d\n", (*heap_ptr)->ce1->ce1->element); // -4
-	printf("%d\n", (*heap_ptr)->ce1->ce1->ce1->element); // -90
-	printf("%d\n", (*heap_ptr)->ce1->ce1->ce1->ce2->element);
-	printf("%d\n", (*heap_ptr)->ce1->ce1->ce2->element); // 2
-	printf("%d\n", (*heap_ptr)->ce1->ce1->ce2->ce2->element); // 44
-	printf("%d\n", (*heap_ptr)->ce1->ce1->ce2->ce2->ce1->element); // 3
+	//printf("##########\n");
+	//printf("%d\n", (*heap_ptr)->element); // 84
+	//printf("%d\n", (*heap_ptr)->ce1->element); // 9
+	//printf("%d\n", (*heap_ptr)->ce1->ce2->element); // 44
+	//printf("%d\n", (*heap_ptr)->ce1->ce1->element); // -4
+	//printf("%d\n", (*heap_ptr)->ce1->ce1->ce1->element); // -90
+	//printf("%d\n", (*heap_ptr)->ce1->ce1->ce1->ce2->element); // -27
+	//printf("%d\n", (*heap_ptr)->ce1->ce1->ce2->element); // 2
+	//printf("%d\n", (*heap_ptr)->ce1->ce1->ce2->ce2->element); // 3
+	//printf("%d\n", (*heap_ptr)->ce1->ce1->ce2->ce1->element); // 1
 
 
 	int count = 0;
