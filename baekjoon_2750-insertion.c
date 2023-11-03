@@ -28,8 +28,12 @@ int main(void) {
 			arr[k] = arr[i];
 			arr[i] = tmp;
 
-			axis = arr[--k];
-			value = arr[--i];
+			if (k == 0 || i == 0)
+				break;
+			else {
+				axis = arr[--k];
+				value = arr[--i];
+			}
 		}
 
 		count++;
