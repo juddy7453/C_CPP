@@ -57,6 +57,25 @@ void merge_sort(int** arr, int** result, int left, int right) {
 	}
 }
 
+
+int bst(int** arr, int input, int left, int right) {
+	while(left <= right){
+		int mid = (left + right) / 2;
+
+		if (input == (*arr)[mid]) {
+			printf("1 ");
+			return 1;
+		}
+		else if (input > (*arr)[mid])
+			left = mid + 1;
+		else
+			right = mid - 1;
+	}
+	printf("0 ");
+	return 0;
+}
+
+
 int main(void) {
 	int n, m;
 	scanf("%d", &n);
@@ -69,47 +88,11 @@ int main(void) {
 		scanf("%d", &newset[i]);
 	
 	int* result = (int*)malloc(sizeof(int) * n);
-//	selection(&have, n);
-//	selection(&newset, m);
+
 	merge_sort(&have, &result, 0, n - 1);
 
-
-	int t = 0;
-
-	for (int i = 0; i < m; i++) {
-		while (t < n) {
-			if (t < n - 1) {
-				if (have[t] < newset[i] && have[t + 1] > newset[i]) {
-					printf("0 ");
-					break;
-				}
-				else if (have[t] == newset[i]) {
-					printf("1 ");
-					break;
-				}
-				else if (have[t] < newset[i]) {
-					t++;
-				}
-				else {
-					printf("0 ");
-					break;
-				}
-			}
-			else {
-				if (have[t] == newset[i]) {
-					printf("1 ");
-					break;
-				}
-				else {
-					printf("0 ");
-					break;
-				}
-			}
-
-		}
-		t = 0;
-	}
-
+	for (int i = 0; i < m; i++)
+		bst(&have, newset[i], 0, n - 1);
 
 	return 0;
 
