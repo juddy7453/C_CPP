@@ -4,7 +4,7 @@
 int main(void) {
 	int t;
 	scanf("%d", &t);
-	int** arr = (int**)malloc(sizeof(int*) * t);
+	int ** arr = (int**)malloc(sizeof(int*) * t);
 	for (int i = 0; i < t; i++)
 		*(arr + i) = (int*)malloc(sizeof(int) * 2);
 
@@ -17,7 +17,7 @@ int main(void) {
 	int num = 3;
 	prime[0] = 2;
 	int j = 1; int count = 1;
-	while(j < 6000) {
+	while (j < 6000) {
 		int ii = 0;
 		while (ii <= j) {
 			if (ii == j) {
@@ -45,34 +45,32 @@ int main(void) {
 		}
 	}
 
-
-	int r = 0; int q = 0; j = 0;
-	for (int i = 0; i < t; i++) {
-		if (arr[i][0] == 1 || arr[i][1] == 1) // 둘 중 하나가 1일 경우
-			printf("%d\n", arr[i][0] * arr[i][1]);
-		else if (arr[i][0] % arr[i][1] == 0) // 둘 중 하나가 다른 하나의 배수일 경우
-			printf("%d\n", arr[i][0]);
-		else if (arr[i][1] % arr[i][0] == 0)
-			printf("%d\n", arr[i][1]);
+	long long max;
+	int p = 0;
+	for (int k = 0; k < t; k++) {
+		if (arr[k][0] == 1 || arr[k][1] == 1) // 둘 중 하나가 1일 경우
+			printf("%d\n", arr[k][0] * arr[k][1]);
+		else if (arr[k][0] % arr[k][1] == 0) // 둘 중 하나가 다른 하나의 배수일 경우
+			printf("%d\n", arr[k][0]);
+		else if (arr[k][1] % arr[k][0] == 0)
+			printf("%d\n", arr[k][1]);
 		else {
-			q = arr[i][0] * arr[i][1];
-			while (prime[j] <= q) {
-				if ((arr[i][0] % prime[j] == 0) && (arr[i][1] % prime[j] == 0)) {
-					q /= prime[j];
-					arr[i][0] /= prime[j];
-					arr[i][1] /= prime[j];
-					continue;
+			max = 1;
+			p = 0;
+			while (prime[p] <= arr[k][0] || prime[p] <= arr[k][1]) {
+				if (arr[k][0] % prime[p] == 0 && arr[k][1] % prime[p] == 0) {
+					max *= prime[p];
+					arr[k][0] /= prime[p];
+					arr[k][1] /= prime[p];
 				}
-				if (prime[j+1] < 45000)
-					j++;
-				else
-					break;
-				
+				else {
+					p++;
+				}
 			}
-			printf("%d\n", q);
+			max *= arr[k][0] * arr[k][1];
+			printf("%lld\n", max);
 		}
-		
 	}
-
+	
 	return 0;
 }
