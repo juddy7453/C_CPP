@@ -4,7 +4,7 @@
 
 typedef struct s {
 	int num;
-	char name[20];
+	char name[21];
 }Pokemon;
 
 int compare(const void* a, const void* b) {
