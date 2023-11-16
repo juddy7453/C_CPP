@@ -7,12 +7,12 @@ typedef struct s {
 }Pair;
 
 int compare(const void* n1, const void* n2) {
-	if ((*(Pair*)n1).x > (*(Pair*)n2).x)
+	if ((*(Pair*)n1).y > (*(Pair*)n2).y)
 		return 1;
-	else if ((*(Pair*)n1).x < (*(Pair*)n2).x)
+	else if ((*(Pair*)n1).y < (*(Pair*)n2).y)
 		return -1;
 	else {
-		if ((*(Pair*)n1).y > (*(Pair*)n2).y)
+		if ((*(Pair*)n1).x > (*(Pair*)n2).x)
 			return 1;
 		else
 			return -1;
