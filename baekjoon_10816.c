@@ -8,60 +8,58 @@ int compare(const void* a, const void* b) {
 		return -1;
 }
 
-int bs(int* arr, int element, int value, int firstindex, int lastindex) {
-	value = firstindex + (lastindex - firstindex) / 2;
-	printf("value=%d\n", value);
-	int r = arr[value] - element;
-	if (firstindex > lastindex)
+int bs(int* arr, int n, int value, int startindex, int endindex) {
+	if (startindex >= endindex)
 		return 0;
+
+	int mid = (endindex - startindex) / 2;
+	value = startindex + mid;
+	int r = arr[value] - n;
 
 	int check = 1;
 
-	while (firstindex < lastindex) {
+	while (startindex < endindex) {
 
 		if (r < 0) { // element가 value보다 크다면
-			return bs(arr, element, value, value + 1, lastindex);
+			return bs(arr, n, value, value + 1, endindex);
 		}
 		else if (r > 0) { // element가 value보다 작다면
-			return bs(arr, element, value, firstindex, value - 1);
+			return bs(arr, n, value, startindex, value - 1);
 		}
 		else {
-			int pivot_l = value-1;
-			int pivot_r = value+1;
+			int pivot_l = value - 1;
+			int pivot_r = value + 1;
 
 			// 오른쪽 왼쪽 중 하나라도 또 element가 있을 경우
-			if (arr[pivot_l] == element || arr[pivot_r] == element) {
-				while (arr[pivot_l] == element) {
+			if (arr[pivot_l] == n || arr[pivot_r] == n) {
+				while (arr[pivot_l] == n) {
 					pivot_l--;
 					if (pivot_l < 0) {
 						pivot_l++;
-						const pivot_l;
 						check = 0;
 						break;
 					}
 				}
-				while (arr[pivot_r] == element) {
+				while (arr[pivot_r] == n) {
 					pivot_r++;
-					if (pivot_r > lastindex) {
+					if (pivot_r > endindex) {
 						pivot_r--;
-						const pivot_r;
 						check = 0;
 						break;
 					}
 				}
-			//	printf("pivot_r = %d\n", pivot_r);
-			//	printf("pivot_l = %d\n", pivot_l);
-
 
 			}
 			return pivot_r - pivot_l - check;
-		
-			
+
+
 		}
-	
+
 	}
-	
+
 }
+
+
 
 int main(void) {
 	int m;
@@ -76,15 +74,39 @@ int main(void) {
 	for (int i = 0; i < n; i++)
 		scanf("%d", &have[i]);
 
-
-	qsort(given, m, sizeof(int), compare);
-
-
-	int* arr = (int*)malloc(sizeof(int) * n);
-
-	for (int i = 0; i < n; i++) {
-		arr[i] = bs(given, have[i], 0, 0, n - 1);
-	//	printf("%d ", arr[i]);
+	if (n == 1) {
+		int c = 0;
+		for (int u = 0; u < m; u++) {
+			if (have[0] == given[u]) {
+				c++;
+			}
+		}
+		printf("%d ", c);
+		return 0;
 	}
+
+	if (m > 1) {
+
+		qsort(given, m, sizeof(int), compare);
+
+
+		int* arr = (int*)malloc(sizeof(int) * n);
+		for (int i = 0; i < n; i++) {
+			arr[i] = bs(given, have[i], 0, 0, m - 1);
+			printf("%d ", arr[i]);
+		}
+		return 0;
+	}
+
+	else if (m == 1) {
+		for (int t = 0; t < n; t++) {
+			if (given[0] == have[t])
+				printf("1 ");
+			else
+				printf("0 ");
+		}
+		return 0;
+	}
+
 	return 0;
 }
